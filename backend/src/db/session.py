@@ -1,7 +1,9 @@
 import os
+from dotenv import load_dotenv
 from contextlib import asynccontextmanager
 from psycopg_pool import AsyncConnectionPool
 
+load_dotenv()
 
 DB_USER = os.environ.get("POSTGRES_USER")
 DB_PASSWORD = os.environ.get("POSTGRES_PASSWORD")

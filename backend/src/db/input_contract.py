@@ -1,12 +1,17 @@
-import asyncio
+from pathlib import Path
 
-from ..db.session import pool, establish_db_connection
-from ..schemas.data_contracts import EvalContract
+from db.session import pool, establish_db_connection
+from schemas.data_contracts import EvalContract
 
-contract = EvalContract()
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 async def main():
+    contract = EvalContract(
+        task_id = input("Task ID: "),
+        prompt = input("Prompt: "),
+        expected_output = input("Expected output: ")
+    )
     async with pool:
         async with establish_db_connection() as conn:
             await conn.execute(
